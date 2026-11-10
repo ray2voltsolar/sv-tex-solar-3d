@@ -37,6 +37,8 @@ Manual start: `cd webapp` then `python -m http.server 8765`, then open http://12
 
 Keyboard: `1`–`9` views · `O` perspective/orthographic · `Space` play the day · `M` measure · `L` labels · `F` fullscreen · `R` reset · `P` screenshot · `H` hide the panel · `Esc` cancel.
 Mouse: left-drag orbits, right-drag pans, wheel zooms (towards the cursor).
+Touchpad pinch, `Ctrl` + wheel and `Ctrl` `+` / `−` zoom the 3D view only; the panel and buttons always stay the same size. On phones, pinch with two fingers to zoom and drag with one to orbit.
+If the browser page was zoomed before this was added, press `Ctrl` + `0` once to reset it.
 
 ## System modelled
 | Item | Value |

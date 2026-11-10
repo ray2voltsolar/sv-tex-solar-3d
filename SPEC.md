@@ -121,6 +121,13 @@ Builder entry points (async, return objects; add nothing to the scene yourself �
   * **Flat, unbranded chrome (client decision, 10 Nov 2026):** no logo / brand mark / pictogram anywhere (header,
     loader, favicon, cards) and no decorative colour gradients (progress bars, KPI cards, chart bars use flat fills —
     accent `--accent`). The brand appears only as the text line above. Data colour scales (shade heat-map legend) are fine.
+  * **Zoom only zooms the 3D view (client request, 10 Nov 2026):** touchpad pinch, Ctrl/⌘+wheel, Ctrl/⌘ + / − and phone
+    pinches must never zoom the web page or its UI. `core/zoomguard.js` owns this: it blocks page zoom everywhere, sends
+    pinches over floating overlays (view bar, header, labels, compass) to the 3D view, ignores them over the side panel /
+    phone sheet, and hands drags/pinches that start on a 3D label to OrbitControls (a tap still clicks the label). Ctrl+0
+    stays with the browser so an already-zoomed page can be reset. New overlays that sit on the scene need no extra
+    code; new scrollable cards must be added to `CARDS` in `zoomguard.js` so their plain wheel still scrolls.
+    Regression suite: `python tools/zoomtest.py http://127.0.0.1:8765/ out.json` (desktop + phone, real GPU).
   * Header: customer name, location, "145.08 kWp Rooftop Solar PV".
   * **Summary card**: 234 × Vikram Solar HYPERSOL 620 Wp, 145.08 kWp, per-roof table (Block A 120 / 74.40 kWp,
     Block C 66 / 40.92 kWp, Block D 48 / 29.76 kWp), 13 strings, 2 × 60 kW inverters, DC/AC 1.21, annual generation

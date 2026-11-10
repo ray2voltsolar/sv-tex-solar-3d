@@ -15,6 +15,7 @@ import { CameraRig, VIEWS } from './core/cameras.js';
 import { createLabelRenderer, createSiteLabels, createCompass, createScaleBar } from './core/labels.js';
 import { MeasureTool, raycastScene, takeScreenshot } from './core/tools.js';
 import { createUI } from './core/ui.js';
+import { installZoomGuard } from './core/zoomguard.js';
 import { formatIN, fmtClock, fmtMinutes, fmtDateLong, escapeHtml } from './core/format.js';
 
 // ---------------------------------------------------------------- errors
@@ -71,6 +72,8 @@ async function boot() {
   mark('renderer');
   const scene = new THREE.Scene();
   const rig = new CameraRig(renderer.domElement);
+  // pinch / Ctrl+wheel / Ctrl± anywhere on the page zoom the 3D view only — never the page and its UI
+  installZoomGuard({ target: renderer.domElement, onZoom: () => demandRender(600) });
   const lighting = new Lighting({ renderer, scene, quality });
   const post = new PostFX(renderer, scene, rig.camera, quality);
   const labelRenderer = createLabelRenderer(document.body);
