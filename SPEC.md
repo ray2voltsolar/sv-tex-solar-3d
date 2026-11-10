@@ -118,6 +118,9 @@ Builder entry points (async, return objects; add nothing to the scene yourself �
   (≈ WA0010: from the east field ~(62, 20, 1.6) looking west; ≈ WA0011: ~(58, 46, 1.6) looking NW at Block A),
   Drone orbit (auto-rotate around the site).
 - UI (polished, professional, glass-panel style; brand line "Prepared by Ray2Volt Solar" from `PROJECT.preparedBy`):
+  * **Flat, unbranded chrome (client decision, 10 Nov 2026):** no logo / brand mark / pictogram anywhere (header,
+    loader, favicon, cards) and no decorative colour gradients (progress bars, KPI cards, chart bars use flat fills —
+    accent `--accent`). The brand appears only as the text line above. Data colour scales (shade heat-map legend) are fine.
   * Header: customer name, location, "145.08 kWp Rooftop Solar PV".
   * **Summary card**: 234 × Vikram Solar HYPERSOL 620 Wp, 145.08 kWp, per-roof table (Block A 120 / 74.40 kWp,
     Block C 66 / 40.92 kWp, Block D 48 / 29.76 kWp), 13 strings, 2 × 60 kW inverters, DC/AC 1.21, annual generation

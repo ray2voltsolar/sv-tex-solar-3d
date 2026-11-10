@@ -131,7 +131,7 @@ export function createUI({ site, summary, views, handlers }) {
         <div class="kpi"><div class="v">${formatIN(Math.round(s.co2TonnesPerYear))}<small>t / yr</small></div><div class="k">CO₂ avoided</div></div>
         <div class="kpi"><div class="v">${formatIN(Math.round(s.moduleAreaM2))}<small>m²</small></div><div class="k">Module area</div></div>
       </div>
-      <div class="mod-line"><div class="mod-ico" aria-hidden="true"></div><div><b>${s.modules} × ${escapeHtml(site.MODULE.make)} HYPERSOL ${site.MODULE.wp} Wp</b>
+      <div class="mod-line"><div><b>${s.modules} × ${escapeHtml(site.MODULE.make)} HYPERSOL ${site.MODULE.wp} Wp</b>
         <span>N-type TOPCon · bifacial glass-glass · 132 half-cut cells · ${site.MODULE.efficiencyPct}% eff.</span></div></div>
 
       <h2 class="sec">Modules per roof</h2>

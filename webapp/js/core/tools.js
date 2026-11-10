@@ -105,7 +105,7 @@ export class MeasureTool {
 }
 
 /**
- * Render a high-resolution PNG (2× the CSS size, capped at ≈10 MP) with labels and a branded caption, then trigger
+ * Render a high-resolution PNG (2× the CSS size, capped at ≈10 MP) with labels and a text caption, then trigger
  * a browser download (called from a user click).
  */
 export async function takeScreenshot({ renderer, post, rig, labelObjs, caption, filename }) {
