@@ -252,6 +252,10 @@ Builder entry points (async, return objects; add nothing to the scene yourself �
 - **Loading.** Builder modules are fetched in parallel; shaders are pre-compiled with the post chain's render target bound
   (so the variants match); shading/BVH loads in the background after the first frame; the satellite tiles download while the
   other builders run. `performance.getEntriesByType('mark')` shows the load timeline (`boot`, `built:<key>`, `compiled`, `ready`).
+- **Decals / depth bias.** Do not use `polygonOffsetFactor` on decals that lie under other geometry (e.g. the contact-AO
+  sheet under the modules): its slope term grows with distance and obliquity and, on real GPUs (24-bit depth), pushed the
+  sheet through the glass at overview range so the arrays rendered black. Use a capped view-space pull (see `solar/index.js`).
+  Software-renderer captures (`tools/cap.py`) do not show this class of bug — check far views on a real GPU.
 - Ownership during fix rounds: buildings → `webapp/js/buildings/*`; solar → `webapp/js/solar/*`; structures → `webapp/js/structures/*`;
   env → `webapp/js/env/*`; core → `webapp/index.html`, `webapp/css/*`, `webapp/js/main.js`, `webapp/js/core/*`; analysis → `webapp/js/analysis/*`,
   `webapp/dev/shading-test.html`. **Nobody edits `webapp/js/site-data.js` during a fix round** — put requested changes in your report

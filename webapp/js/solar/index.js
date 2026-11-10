@@ -29,7 +29,7 @@ export async function buildSolar(ctx) {
     // base layer = AR-coated front glass (soft sheen of the sky), clearcoat = the glass reflection.
     // clearcoatRoughness 0.07 (not mirror-sharp): real 3.2 mm tempered/AR glass + slight bow gives a graded
     // sun glint spread over several modules instead of single saturated "silver tiles".
-    clearcoat: 1.0, clearcoatRoughness: 0.07, envMapIntensity: Q === 'high' ? 1.8 : 1.5, specularIntensity: 0.8,
+    clearcoat: 1.0, clearcoatRoughness: 0.07, envMapIntensity: 1.8, specularIntensity: 0.8,
     ior: 1.5,
   });
   const uEmis = { value: 0 };
@@ -171,8 +171,27 @@ totalEmissiveRadiance += vTint.rgb * vTint.w * uEmis;`);
     tex.generateMipmaps = true; tex.needsUpdate = true;
     const mat = new THREE.MeshBasicMaterial({
       name: 'pv-contact-ao', map: tex, blending: THREE.MultiplyBlending, premultipliedAlpha: true, transparent: true,
-      depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4, toneMapped: false, fog: false,
+      depthWrite: false, toneMapped: false, fog: false,
     });
+    // Depth bias in view space instead of glPolygonOffset: the offset's slope term (factor × depth slope per pixel)
+    // grows with distance and view obliquity, and at overview range it pulled this sheet in front of the modules'
+    // glass (~75 mm above it) on real GPUs with 24-bit depth → arrays rendered as flat black slabs. Pull by ~2 depth
+    // steps (24-bit step ≈ 2e-7·z² m with near = 0.3 m), capped well below the glass; fade out beyond ~250 m.
+    mat.onBeforeCompile = (sh) => {
+      sh.vertexShader = sh.vertexShader
+        .replace('#include <common>', '#include <common>\nvarying float vAoFade;')
+        .replace('#include <project_vertex>', `#include <project_vertex>
+        {
+          float aoZ = max(-mvPosition.z, 0.0);
+          mvPosition.z += clamp(4e-7 * aoZ * aoZ, 0.004, 0.03);
+          gl_Position = projectionMatrix * mvPosition;
+          vAoFade = 1.0 - smoothstep(220.0, 320.0, aoZ);
+        }`);
+      sh.fragmentShader = sh.fragmentShader
+        .replace('#include <common>', '#include <common>\nvarying float vAoFade;')
+        .replace('#include <map_fragment>', '#include <map_fragment>\ndiffuseColor.rgb = mix(vec3(1.0), diffuseColor.rgb, vAoFade);');
+    };
+    mat.customProgramCacheKey = () => 'pv-contact-ao-v2';
     const geo = new THREE.PlaneGeometry(cw, cl).rotateX(-Math.PI / 2);   // local XZ, +Y = plane normal
     const im = new THREE.InstancedMesh(geo, mat, N); im.name = 'pv-contact-ao';
     modules.forEach((m, i) => im.setMatrixAt(i, planeMatrix(site, site.ROOF_PLANES[m.plane], m.uc, m.vc, 0.006)));
