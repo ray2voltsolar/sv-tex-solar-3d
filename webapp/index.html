@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sri Venkateswara Tex Process · 145.08 kWp Rooftop Solar · Ray2Volt Solar</title>
+<meta name="description" content="Interactive 3D proposal: 145.08 kWp rooftop solar PV system for Sri Venkateswara Tex Process, Nagari (AP). Prepared by Ray2Volt Solar.">
+<meta name="theme-color" content="#0e141c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e141c'/%3E%3Ccircle cx='32' cy='25' r='10' fill='%23ffb92e'/%3E%3Cpath d='M12 50 L22 36 H42 L52 50 Z' fill='%234db2ff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+    "three-mesh-bvh": "https://cdn.jsdelivr.net/npm/three-mesh-bvh@0.8.3/build/index.module.js"
+} }
+</script>
+</head>
+<body>
+<div id="viewport" aria-label="3D model of the factory"></div>
+
+<!-- Loading screen -->
+<div id="loader" role="status" aria-live="polite">
+  <div class="ld-card">
+    <div class="ld-logo" aria-hidden="true">
+      <svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="10" class="ld-sun"/><g class="ld-rays">
+        <line x1="32" y1="4" x2="32" y2="9"/><line x1="46" y1="10" x2="43" y2="13.5"/><line x1="52" y1="24" x2="47" y2="24"/>
+        <line x1="18" y1="10" x2="21" y2="13.5"/><line x1="12" y1="24" x2="17" y2="24"/></g>
+        <path d="M10 54 L20 38 H44 L54 54 Z" class="ld-panel"/><path d="M27 38 L24 54 M37 38 L40 54 M15 46 H49" class="ld-grid"/></svg>
+    </div>
+    <div class="ld-eyebrow">Rooftop Solar PV Proposal</div>
+    <h1 class="ld-title">Sri Venkateswara Tex Process</h1>
+    <div class="ld-sub">145.08 kWp · Nagari, Andhra Pradesh</div>
+    <div class="ld-bar"><i id="ldFill"></i></div>
+    <div class="ld-step" id="ldStep">Starting 3D engine…</div>
+    <div class="ld-by">Prepared by <b>Ray2Volt Solar</b></div>
+  </div>
+</div>
+
+<!-- Brand header -->
+<header id="brand" class="glass">
+  <div class="br-mark" aria-hidden="true">
+    <svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="9" fill="#ffb92e"/><path d="M10 54 L20 38 H44 L54 54 Z" fill="#4db2ff"/><path d="M27 38 L24 54 M37 38 L40 54 M15 46 H49" stroke="#0e141c" stroke-width="2.2" fill="none"/></svg>
+  </div>
+  <div class="br-text">
+    <div class="br-eyebrow" id="brSystem">145.08 kWp Rooftop Solar PV</div>
+    <h1 class="br-title" id="brCustomer">Sri Venkateswara Tex Process</h1>
+    <div class="br-sub" id="brLocation">Nagari, Andhra Pradesh</div>
+  </div>
+  <div class="br-sun" id="sunChip" title="Sun position for the selected date & time">
+    <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></svg>
+    <span id="sunChipText">—</span>
+  </div>
+</header>
+
+<!-- Side panel / bottom sheet -->
+<aside id="panel" class="glass" aria-label="Controls">
+  <div class="sheet-grip" id="sheetGrip" aria-hidden="true"><i></i></div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="summary" class="active" title="System summary">
+      <svg viewBox="0 0 24 24" class="ic"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg><span>Summary</span></button>
+    <button role="tab" data-tab="sun" title="Sun, shadows & shade analysis">
+      <svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></svg><span>Sun</span></button>
+    <button role="tab" data-tab="views" title="Camera views">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M2.8 12s3.4-6.2 9.2-6.2 9.2 6.2 9.2 6.2-3.4 6.2-9.2 6.2S2.8 12 2.8 12Z"/><circle cx="12" cy="12" r="2.8"/></svg><span>Views</span></button>
+    <button role="tab" data-tab="layers" title="Layers">
+      <svg viewBox="0 0 24 24" class="ic"><path d="m12 3.5 8.5 4.6L12 12.7 3.5 8.1 12 3.5Z"/><path d="m3.5 12 8.5 4.6 8.5-4.6M3.5 15.9l8.5 4.6 8.5-4.6"/></svg><span>Layers</span></button>
+    <button role="tab" data-tab="tools" title="Tools">
+      <svg viewBox="0 0 24 24" class="ic"><path d="M14.7 6.3a4 4 0 0 0 5 5L13 18l-3 3-4-4 3-3 6.7-6.7Z"/><path d="m3 21 3-3"/></svg><span>Tools</span></button>
+    <button class="tab-collapse" id="panelCollapse" title="Hide panel (H)" aria-label="Hide panel">
+      <svg viewBox="0 0 24 24" class="ic"><path d="m9 6 6 6-6 6"/></svg></button>
+  </nav>
+  <div class="panel-body" id="panelBody">
+    <section class="tab-pane active" data-pane="summary" id="paneSummary"></section>
+    <section class="tab-pane" data-pane="sun" id="paneSun"></section>
+    <section class="tab-pane" data-pane="views" id="paneViews"></section>
+    <section class="tab-pane" data-pane="layers" id="paneLayers"></section>
+    <section class="tab-pane" data-pane="tools" id="paneTools"></section>
+  </div>
+  <div class="panel-foot">Prepared by <b id="preparedBy">Ray2Volt Solar</b></div>
+</aside>
+<button id="panelOpen" class="glass" title="Show panel (H)" aria-label="Show panel">
+  <svg viewBox="0 0 24 24" class="ic"><path d="m15 6-6 6 6 6"/></svg><span>Panel</span></button>
+
+<!-- Bottom view bar -->
+<div id="viewbar" class="glass" role="toolbar" aria-label="Views"></div>
+
+<div id="compass" class="glass"></div>
+<div id="scalebar" class="glass"></div>
+<div id="legendFloat" class="glass" hidden></div>
+<div id="tooltip" role="tooltip" hidden></div>
+<div id="infocard" class="glass" hidden></div>
+<div id="measureHint" class="glass" hidden></div>
+<div id="toasts" aria-live="polite"></div>
+<footer id="attrib"></footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

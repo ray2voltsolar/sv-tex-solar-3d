@@ -1,0 +1,12 @@
+# review screenshots (hundreds of MB) — regenerate with tools/cap.py
+webapp/_screens/
+# customer site photos & layout sketch: reference material only, not used by the app
+*.jpeg
+*.jpg
+Images/
+# local tooling
+.claude/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dev Preview</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #9fb8cf; overflow: hidden; font: 12px system-ui, sans-serif; }
+  #info { position: fixed; left: 8px; top: 8px; background: rgba(0,0,0,.55); color: #fff; padding: 6px 8px; border-radius: 6px; max-width: 60vw; white-space: pre-wrap; }
+</style>
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+    "three-mesh-bvh": "https://cdn.jsdelivr.net/npm/three-mesh-bvh@0.8.3/build/index.module.js"
+} }
+</script>
+</head>
+<body>
+<div id="info">loading…</div>
+<script type="module" src="./harness.js"></script>
+</body>
+</html>

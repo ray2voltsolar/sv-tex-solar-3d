@@ -1,0 +1,18 @@
+[
+  {"eval": "await __app.setTime('2026-11-15T10:30'); return await __app.setView('overview',{instant:true})", "out": "overview.png"},
+  {"eval": "return await __app.setView('top',{instant:true})", "out": "top.png"},
+  {"eval": "return await __app.setView('photoEast',{instant:true})", "out": "photoEast_WA0010.png"},
+  {"eval": "return await __app.setView('photoA',{instant:true})", "out": "photoA_WA0011.png"},
+  {"eval": "return await __app.lookAt([47,45,1.6],[36,53,4.5],55)", "out": "blockA_corner_WA0005.png"},
+  {"eval": "return await __app.lookAt([8,47.5,1.6],[11,41,2.6],60)", "out": "offices_WA0007.png"},
+  {"eval": "return await __app.lookAt([20.6,44.5,1.6],[20.6,20,3.2],60)", "out": "passage_WA0003.png"},
+  {"eval": "return await __app.lookAt([47,33,1.6],[31,38,6],55)", "out": "etp_WA0009.png"},
+  {"eval": "return await __app.setView('blockA',{instant:true})", "out": "roof_blockA.png"},
+  {"eval": "return await __app.setView('blockC',{instant:true})", "out": "roof_blockC.png"},
+  {"eval": "return await __app.setView('blockD',{instant:true})", "out": "roof_blockD.png"},
+  {"eval": "return await __app.lookAt([20.5,51,10.2],[25.5,56,7.2],50)", "out": "module_closeup.png"},
+  {"eval": "return await __app.setView('entrance',{instant:true})", "out": "entrance.png"},
+  {"eval": "await __app.setTime('2026-11-15T17:40'); return await __app.setView('overview',{instant:true})", "out": "dusk.png"},
+  {"eval": "await __app.setTime('2026-11-15T10:30'); __app.setLayer('strings', true); await __app.setView('overview',{instant:true}); return __app.stats()", "out": "strings.png"},
+  {"eval": "__app.setLayer('strings', false); return __app.stats()"}
+]
